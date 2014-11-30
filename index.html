@@ -91,68 +91,70 @@
         <br/>
 
         <form role="form">
-            <div class="row col-sm-12 col-md-4">
-                <div class="form-group col-sm-6 col-md-12">
+            <div class="row">
+                <div class="col-md-4">
                     <label>Product</label>
-                    <input type="email" class="form-control" id="productName" placeholder="Product title">
-                </div>
-
-                <div class="form-group col-sm-6 col-md-12">
-                    <div class="visible-sm-block">
-                        <label style="height: 1.9ex"> </label>
-                    </div>
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Category">
-                        <div class="input-group-btn">
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
-                            <ul class="dropdown-menu dropdown-menu-right" role="menu">
-                                <li><a href="#">Category 1</a></li>
-                                <li><a href="#">Category 2</a></li>
-                                <li><a href="#">Category 3</a></li>
-                            </ul>
-                        </div><!-- /btn-group -->
-                    </div>
-                </div>
-            </div>
-
-            <div class="row col-sm-12 col-md-8">
-                <div class="form-group col-sm-6">
-                    <label>Current Price</label>
-                    <div class="input-group">
-                        <span class="input-group-addon">$</span>
-                        <input class="form-control" id="priceFrom" placeholder="From">
-                        <!--</div>
-                        <div class="input-group col-xs-5">-->
-                        <span class="input-group-addon">$</span>
-                        <input class="form-control" id="priceTo" placeholder="To">
-                    </div>
-                    <br/>
-                    <div class="col-xs-12">
-                        <input id="priceSlider">
+                    <div class="row">
+                        <div class="form-group col-sm-6 col-md-12">
+                            <input type="email" class="form-control" id="productName" placeholder="Product title">
+                        </div>
+                        <div class="form-group col-sm-6 col-md-12">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Category">
+                                <div class="input-group-btn">
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
+                                    <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                                        <li><a href="#">Category 1</a></li>
+                                        <li><a href="#">Category 2</a></li>
+                                        <li><a href="#">Category 3</a></li>
+                                    </ul>
+                                </div><!-- /btn-group -->
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="form-group col-sm-6">
-                    <label>Max Auction Close Date</label>
-                    <div class='input-group date' id='closeDatePicker'>
-                        <input class="form-control" id="closeDate" placeholder="Close Date">
+                <div class="col-sm-6 col-md-4">
+                    <div class="form-group">
+                        <label>Current Price</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">$</span>
+                            <input class="form-control" id="priceFrom" placeholder="From">
+                            <!--</div>
+                            <div class="input-group col-xs-5">-->
+                            <span class="input-group-addon">$</span>
+                            <input class="form-control" id="priceTo" placeholder="To">
+                        </div>
+                        <br/>
+                        <div class="col-xs-12">
+                            <input id="priceSlider">
+                        </div>
+                    </div>
+                </div>
+
+                <div class=" col-sm-6 col-md-4">
+                    <div class="form-group">
+                        <label>Max Auction Close Date</label>
+                        <div class='input-group date' id='closeDatePicker'>
+                            <input class="form-control" id="closeDate" placeholder="Close Date">
                     <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
                     </span>
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group col-sm-6">
-                    <div class="row">
-                        <label class="col-xs-9 col-sm-8" style="margin-top: 0.5em">Number of Bids</label>
-                        <div class="col-xs-3 col-sm-4">
-                            <input class="form-control" type="number" value="1" min="1">
+                    <div class="form-group">
+                        <div class="row">
+                            <label class="col-xs-9 col-sm-8" style="margin-top: 0.5em">Number of Bids</label>
+                            <div class="col-xs-3 col-sm-4">
+                                <input class="form-control" type="number" value="1" min="1">
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="row">
-                <button type="button" class="btn btn-primary col-xs-offset-2 col-xs-8 col-sm-offset-3 col-sm-6 col-md-offset-4 col-md-3" >Find now</button>
+                <button type="button" class="btn btn-primary col-xs-offset-2 col-xs-8 col-sm-offset-3 col-sm-6 col-md-offset-4 col-md-4 btn-lg" >Find now</button>
             </div>
         </form>
     </div>
@@ -179,6 +181,32 @@
 <script id="featuredProducts" type="text/x-handlebars-template">
     <h2 class="row text-center">{{heading}}</h2>
     <br/>
+    <div class="row">
+        <!-- Featured Products list with thumbnails and description  -->
+        <ul class="list-unstyled">
+            {{#each items}}
+            <li class="col-sm-4">
+                <div class="col-md-4">
+                    <a href="{{url}}"><img src="{{thumb}}" alt="" class="img-responsive"></a>
+                </div>
+
+                <div class="product-description-holder col-md-8">
+                    <h2><a href="{{url}}">{{title}}</a></h2>
+
+                    <p>
+                        <b>Item's description:</b>
+                        {{description}}
+                    </p>
+                </div>
+            </li>
+            {{/each}}
+        </ul>
+        <!-- / Featured Products list with thumbnails and description  -->
+    </div>
+</script>
+
+
+<script id="searchedProducts" type="text/x-handlebars-template">
     <div class="row">
         <!-- Featured Products list with thumbnails and description  -->
         <ul class="list-unstyled">

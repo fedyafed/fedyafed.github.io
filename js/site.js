@@ -2,14 +2,15 @@ $(document).ready(function(){
     //---------------------------------------change page---------------------------------------
     var goToHomePage = function(){
         loadHomeData();
+        $("#searchPage").hide();
         $("#searchForm").show();
         $("#homePage").show();
-        $("#searchPage").hide();
     };
 
     $(".home").click(goToHomePage);
 
     var goToSearchPage = function(){
+        loadSearchData();
         $("#errorMessage").hide();
         $("#searchForm").hide();
         $("#homePage").hide();
@@ -32,14 +33,35 @@ $(document).ready(function(){
             .show();
     };
 
+    var searchedProductsTemplate = Handlebars.compile($("#searchedProducts").html());
+    var viewSearchedProducts = function(data) {
+        console.log(searchedProductsTemplate(data));
+        $("#products")
+            .html(searchedProductsTemplate(data))
+            .show();
+    };
+
     //------------------------------------JSON-----------------------------------------------
     var loadHomeData = function() {
         $("#errorMessage").hide();
         $("#products").hide();
 
         $.getJSON("json/featured-products.json", function (data) {
-            console.log(data);
             viewFeaturedProducts(data);
+        }).fail(function () {
+            $("#errorMessage")
+                .text("Can not load resources.")
+                .show();
+        });
+    };
+
+    var loadSearchData = function() {
+        $("#errorMessage").hide();
+        $("#products").hide();
+
+        $.getJSON("json/search-results.json", function (data) {
+            console.log(data);
+            viewSearchedProducts(data);
         }).fail(function () {
             $("#errorMessage")
                 .text("Can not load resources.")
