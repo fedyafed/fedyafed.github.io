@@ -27,7 +27,6 @@ $(document).ready(function(){
     //------------------------------------handlebars--------------------------------------------
     var featuredProductsTemplate = Handlebars.compile($("#featuredProducts").html());
     var viewFeaturedProducts = function(data) {
-        console.log(featuredProductsTemplate(data));
         $("#products")
             .html(featuredProductsTemplate(data))
             .show();
@@ -35,7 +34,6 @@ $(document).ready(function(){
 
     var searchedProductsTemplate = Handlebars.compile($("#searchedProducts").html());
     var viewSearchedProducts = function(data) {
-        console.log(searchedProductsTemplate(data));
         $("#products")
             .html(searchedProductsTemplate(data))
             .show();
@@ -60,7 +58,6 @@ $(document).ready(function(){
         $("#products").hide();
 
         $.getJSON("json/search-results.json", function (data) {
-            console.log(data);
             viewSearchedProducts(data);
         }).fail(function () {
             $("#errorMessage")
@@ -70,6 +67,10 @@ $(document).ready(function(){
     };
 
     //----------------------------------------Initialization------------------------------
+    $("#category li").click(function(event){
+        $("#category input").val(event.currentTarget.innerText);
+    });
+
     $("#priceSlider")
         .slider({
             min: 0,
@@ -96,6 +97,11 @@ $(document).ready(function(){
             defaultDate: new Date()
     });
 
+    var updateTimer = function () {
+        $('.currentTime').text(moment().format('HH:mm'));
+    };
+    updateTimer();
+    setInterval(updateTimer, 1000);
 
-    goToSearchPage();
+    goToHomePage();
 });
