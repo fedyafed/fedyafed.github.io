@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Auction Homepage</title>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/slider.css">
+    <link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+
+<!-- Navbar -->
+<div class="navbar navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand home" href="javascript:void(0);">ABC Auction</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <form id="searchForm" class="navbar-form navbar-left navbar-input-group" role="search">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Enter product name">
+                </div>
+                <button id="searchButton" type="button" class="btn btn-default">Search</button>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="javascript:void(0)" class="home"><span class="glyphicon glyphicon-home"></span>Home</a></li>
+                <li><a href="javascript:void(0)"><span class="glyphicon glyphicon-question-sign"></span> Help</a>
+                </li>
+                <li><a href="javascript:void(0);"><span class="glyphicon glyphicon-user"></span> Login</a></li>
+                <li><a href="javascript:void(0)"><span class="glyphicon glyphicon-shopping-cart"></span> Shopping
+                    cart</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- / Navbar -->
+
+<div class="container">
+    <div class="row">
+        <h3 id="errorMessage" class="alert alert-danger text-center hide-this" role="alert">
+        </h3>
+    </div>
+
+    <div id="homePage" class="row">
+        <!-- Featured Products -->
+        <div id="featured-product-carousel" class="carousel slide" data-pause="hover" data-wrap="true"
+             data-interval="3000">
+            <ol class="carousel-indicators">
+                <li data-target="#featured-product-carousel" data-slide-to="0" class="active"></li>
+                <li data-target="#featured-product-carousel" data-slide-to="1" class=""></li>
+                <li data-target="#featured-product-carousel" data-slide-to="2" class=""></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="item active">
+                    <img src="img/promo-product-1.jpg" alt="ABC Auction Deals" class="img-responsive center-block">
+                </div>
+                <div class="item">
+                    <img src="img/promo-product-2.jpg" alt="ABC Auction Deals" class="img-responsive center-block">
+                </div>
+                <div class="item">
+                    <img src="img/promo-product-3.jpg" alt="ABC Auction Deals" class="img-responsive center-block">
+                </div>
+            </div>
+
+            <!-- Controls -->
+            <a class="left carousel-control" href="#featured-product-carousel" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+            </a>
+            <a class="right carousel-control" href="#featured-product-carousel" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+            </a>
+        </div>
+
+        <!-- / Featured Products -->
+    </div>
+
+    <div id="searchPage" >
+        <div class="row">
+            <a href="javascript:void(0)" class="home">Home</a>
+            <span class="glyphicon glyphicon-chevron-right"></span>
+            <span> Search results</span>
+        </div>
+
+        <br/>
+
+        <form role="form">
+            <div class="row">
+                <div class="col-md-4">
+                    <label>Product</label>
+                    <div class="row">
+                        <div class="form-group col-sm-6 col-md-12">
+                            <input class="form-control" id="productName" placeholder="Product title">
+                        </div>
+                        <div class="form-group col-sm-6 col-md-12">
+                            <div id="category" class="input-group">
+                                <input type="text" class="form-control" placeholder="Category">
+                                <div class="input-group-btn">
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
+                                    <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                                        <li><a href="#">Category 1</a></li>
+                                        <li><a href="#">Category 2</a></li>
+                                        <li><a href="#">Category 3</a></li>
+                                    </ul>
+                                </div><!-- /btn-group -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-md-4">
+                    <div class="form-group">
+                        <label>Current Price</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">$</span>
+                            <input class="form-control" id="priceFrom" placeholder="From">
+                            <!--</div>
+                            <div class="input-group col-xs-5">-->
+                            <span class="input-group-addon">$</span>
+                            <input class="form-control" id="priceTo" placeholder="To">
+                        </div>
+                        <br/>
+                        <div class="col-xs-12">
+                            <input id="priceSlider">
+                        </div>
+                    </div>
+                </div>
+
+                <div class=" col-sm-6 col-md-4">
+                    <div class="form-group">
+                        <label>Max Auction Close Date</label>
+                        <div class='input-group date' id='closeDatePicker'>
+                            <input class="form-control" id="closeDate" placeholder="Close Date">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <label class="col-xs-9 col-sm-8" style="margin-top: 0.5em">Number of Bids</label>
+                            <div class="col-xs-3 col-sm-4">
+                                <input class="form-control" type="number" value="1" min="1">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <button type="button" class="btn btn-primary col-xs-offset-2 col-xs-8 col-sm-offset-3 col-sm-6 col-md-offset-4 col-md-4 btn-lg" >Find now</button>
+            </div>
+        </form>
+    </div>
+
+    <br/>
+
+    <!--  all products will inserted here -->
+    <div id="products" class="hide-this"></div>
+
+    <!-- Footer -->
+    <footer class="text-center">
+        <br/>
+        <a href="javascript:void(0)" class="home">Home</a> |
+        <a href="javascript:void(0)" id="searchLink">Search</a> |
+        <a href="javascript:void(0)">About Us</a> |
+        <a href="javascript:void(0)">Terms of Service</a>
+        <br/><br/>
+    </footer>
+    <!-- / Footer -->
+
+</div>
+
+
+<script id="featuredProducts" type="text/x-handlebars-template">
+    <h2 class="row text-center">{{heading}}</h2>
+    <br/>
+    <div class="row">
+        <!-- Featured Products list with thumbnails and description  -->
+        <ul class="list-unstyled">
+            {{#each items}}
+            <li class="col-sm-4">
+                <div class="col-md-4">
+                    <a href="{{url}}"><img src="{{thumb}}" alt="" class="img-responsive"></a>
+                </div>
+
+                <div class="col-md-8">
+                    <h2><a href="{{url}}">{{title}}</a></h2>
+
+                    <p>
+                        <b>Item's description:</b>
+                        {{description}}
+                    </p>
+                </div>
+            </li>
+            {{/each}}
+        </ul>
+        <!-- / Featured Products list with thumbnails and description  -->
+    </div>
+</script>
+
+
+<script id="searchedProducts" type="text/x-handlebars-template">
+    <div class="row">
+        <!-- Featured Products list with thumbnails and description  -->
+        <ul class="list-unstyled">
+            {{#each items}}
+            <li class="col-md-6">
+                <h2>
+                    <div class="row">
+                        <div class="col-xs-offset-1 col-xs-11 visible-xs"><a href="{{url}}">{{title}}</a></div>
+                    </div>
+                </h2>
+                <div class="row">
+                    <a class="col-xs-5" href="{{url}}"><img src="{{thumb}}" alt="" class="img-responsive"></a>
+                    <h2 class="col-sm-7 hidden-xs modal-title"><a href="{{url}}">{{title}}</a></h2>
+                    <p class="col-xs-7">
+                        {{description}}
+                    </p>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4 col-sm-push-8">
+                        <div class="row">
+                            <div class="col-xs-offset-1 col-xs-4 col-sm-offset-0 col-sm-12">
+                                <h4>$ {{price}} </h4>
+                            </div>
+                            <div class="col-xs-7 col-sm-12">
+                                <h4 class="visible-xs"/>Current Price
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="row">
+                            <div class="col-xs-offset-1 col-xs-4 col-sm-offset-0 col-sm-12">
+                                <h4>
+                                    <span class="glyphicon glyphicon-eye-open"></span>
+                                    <span>{{watchers}}</span>
+                                </h4>
+                            </div>
+                            <div class="col-xs-7 col-sm-12">
+                                <h4 class="visible-xs"/>Watchers
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-sm-pull-8">
+                        <div class="row">
+                            <div class="col-xs-offset-1 col-xs-4 col-sm-offset-0 col-sm-12">
+                                <h4>
+                                    {{timeleft}}h left
+                                </h4>
+                            </div>
+                            <div class="col-xs-7 col-sm-12">
+                                <h4 class="visible-xs"/>
+                                Today
+                                <span class="currentTime"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            {{/each}}
+        </ul>
+        <!-- / Featured Products list with thumbnails and description  -->
+    </div>
+</script>
+
+<script src="js/jquery-2.1.1.min.js" type="text/javascript"></script>
+<script src="js/moment.js" type="text/javascript"></script>
+<script src="js/bootstrap.min.js" type="text/javascript"></script>
+<script src="js/handlebars-v2.0.0.js" type="text/javascript"></script>
+<script src="js/bootstrap-slider.js" type="text/javascript"></script>
+<script src="js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
+<script src="js/site.js" type="text/javascript"></script>
+
+</body>
+</html>
